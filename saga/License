@@ -1,0 +1,65 @@
+<plaintext>
+***  This is a licensing information for SaGA -  ***
+***   Spacial and Geometrical Analysis Toolbox   ***
+
+   SaGA, version 1.0 is SHAREWARE.
+It may be distributed freely as such and used used
+for a trial period of 15 days free of charge.
+After that it must be registered.
+
+Registration fee:
+-----------------
+Single users:                $40.
+Multi-user licenses:
+  first 5 users              $40/user,
+  next  10 users             $20/user,
+  unlimited number of users  $400.
+
+Student license              $20
+(full-time registered undegraduate or graduate students).
+
+Limited license              $20
+is allowed with written (or e-mailed) note from a user 
+explaining that (he/she) needs only a small part of the 
+SaGA Toolbox and considers full fee of $40 too high for
+such usage.
+
+Porting license              free
+  Authors who plan to port this toolbox or part of it
+to other languages and environments should contact me
+for specific arrangements.
+
+FREE within :
+  Department of Earth, Atmospheric & Planetary Sciences,
+  Massachusetts Institute of Technology
+    and
+  Woods Hole Oceanographic Institution.
+
+
+Registered users are entitled to unlimited technical
+support and free updates via e-mail.
+
+
+Send registration fees (in US dollars) to
+
+Kirill Pankratov,
+117 Central St, A2,
+Acton, MA, 01720
+(Memo: SaGA Registration)
+
+
+Include your name, e-mail address, mailing address, 
+phone number, platform and version of MATLAB which you
+are using, and the type of license and number of users.
+
+
+Registered users may modify m-files provided that the
+reference and copyright information about unmodified
+files is present.
+Original unmodified files may be distributed only as an 
+entire group.
+
+
+Questions or comments may be sent to:
+ kirill@plume.mit.edu
+

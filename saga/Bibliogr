@@ -1,0 +1,85 @@
+***   This is some bibliography associated with   ***
+***      SaGA programs and algorithms             ***
+
+
+  Interpolation, mapping
+  ----------------------
+
+  Watson D.F.
+Contouring: a practical guide to analysis and display of spacial data.
+Pergamon Press, 1992, ISBN 0 08 040286 0
+  /A very good book. If you want to learn about contouring
+  and interpolation from irregular datasets you definitely
+  need to start with it. In many cases it is all you'll need.
+  For further information there are plenty of references to 
+  other books and papers./
+
+
+  Daly R.
+Atmospheric data analysis.
+New York: Cambridge University Press, 1991.
+
+  Ripley B.
+Spatial statistics. New York: Wiley 1991.
+
+  Sibson, R., 1981,
+A brief description of natural neighbour interpolation, 
+in Barnett, V., ed., Interpreting multivariate data: John Wiley,
+p. 21.
+ /The first introduction of the "natural neighbour interpolation"
+ method/.
+
+  Bretherthon F. P., R. E.  Davis,  Fandry
+(Objective mapping)
+
+  Franke R., 1982.
+Smooth interpolation of scattered data by local thin plate splines.
+Computers Math with Applic., V.8, #4, 273-281.
+
+  Franke R., 1982.
+Scattered data interpolation: tests of some methods.
+Math. Computation, V.38, p. 181-200.
+
+  Briggs I.C., 1984.
+Machine contouring using minimal curvature.
+Geophysisc, V.39, #1, 39-48.
+
+  Davis J.C. 1981.
+Statistical techniques in petroleum explorations.
+Commun. Stat-Theor. Meth., V.A10, #15, 1479-1503.
+
+  Davis J.C., 1981.
+Contour mapping SURFACE-II.
+Science, V. 237, 669-672. 
+ 
+  Marcotte Denis, 1991,
+Cokriging with MATLAB.
+Computers and Geosciences, v.17, p. 1265-1280.
+ 
+
+
+  Computational geometry.
+  -----------------------
+
+ Preparata F.P. & M.I. Shamos
+Computational geometry: an introduction.
+Springer-Verlag, N.-Y., 1985.
+
+
+
+  Delaunay triangulation, Voronoi tesselation
+  - - - - - - - - - - - - - - - - - - - - - -
+  and related techniques:
+  - - - - - - - - - - - -
+
+Application of Voronoi diagrams ...
+
+ Fortune S.
+A sweepline algorithm for Voronoi diagrams.
+Algorithmica, 2(2), 1987, 153-174.
+
+ Watson D. F.
+Computing n-dimensional Delaunay tesselation with
+application to Voronoi polytopes.
+Computer Jour., V.24, #2, 167-172.
+

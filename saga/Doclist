@@ -1,0 +1,47 @@
+
+Documentation resourses for SaGA toolbox:
+
+1. SaGA Homepage at:
+   ----------------
+   directory:
+ http://puddle.mit.edu/~kirill/PUB/MATLAB/SAGA
+   homepage:
+ http://puddle.mit.edu/~kirill/PUB/MATLAB/SAGAHTML/saga.html
+   archives:
+ http://puddle.mit.edu/~kirill/PUB/MATLAB/SAGA_Z
+ (or, alternatively, "lake" instead of "puddle")
+
+  Homepage includes a www-format "gallery" - a series of 
+pictures illustrating various functions and algorithms with
+brief descriptions.
+
+
+2. General information text files in the toolbox itself:
+   ----------------------------------------------------
+  Bibliogr   - some related references (books and papers)
+  Contents   - partial list of programs
+  Doclist    - this file
+  Flowchart  - which program calls which
+  License    - license, registration and payment info
+  Readme     - the most general information
+  SagaFAQ    - some general questions related to SaGA,
+               underlying methods and algorithms
+  Whatsnew   - updates and releases status
+
+
+3. Demonstrations:
+   --------------
+  dlndemo.m  - Delaunay triangulation
+  treedemo.m - Quadtree adaptive division for interpolation
+               of large datasets.
+    The following functions produce various pictures at
+    the homepage and can also be used as demo:
+  sagawcm.m  - "welcome" picture at the homepage
+  sagapic.m  - pictures from the "gallery"
+
+
+4. Info on specific functions (extended "help sections")
+   -----------------------------------------------------
+  int3info
+  mapinfo
+  polyinfo

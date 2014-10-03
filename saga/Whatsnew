@@ -1,0 +1,115 @@
+<plaintext>
+
+_________ This is WHATSNEW file for SaGA Toolbox _______
+
+/-------------- Last updated  09/27/95 -----------------/
+
+
+==== 09/27/95  Update ===========================================
+
+The SaGA version 1.3 (as of 09/28/95) is now complete.
+    ----------------
+
+There were both additions and improvement/correction of various routines
+in comparison to previous sub-release.
+
+One important addition is a function INPOLYHD (and its auxillaries)
+which determines whether points in a set are inside or outside of
+a multi-dimensional polyhedron.
+
+Also important is that most of the programs dealing with polygons,
+such as ISCROSS.M, INTSECL.M, INTSECPL.M, ISINTPL.M, POLYBOOL.M
+were improved for correct handling various exceptional and degenerate
+situations.
+
+DELAUNAY.M is corrected so that it always produces exact n-dimensional
+Delaunay triangulation.
+
+Interpolation routines INTERPTR.M and its auxillaries EXTRAPTR.M,
+INFLATE.M, ADJSPX.M are also improved to deal with special cases.
+
+CONVEXH.M is improved for better handling of degenerate-rank cases.
+
+Added functions:
+---------------
+
+ BINARY.M    - binary representation of an integer
+               (used in COMBIN);
+
+ COMBIN.M    - combinations of N choose K
+               (used in ROTMAT);
+
+ INPOLYHD.M  - true for a point in a multi-dimensional polyhedron;
+
+ INSPX0.M    - true for a points inside a multi-dimensional simplex
+               (auxillary for INPOLYHD);
+
+ INTERVAL.M  - intersection and union of 1-d intervals (used in
+               some polygon routines);
+
+ LINECHK.M   - checks line type input arguments, used in ISCROSS,
+               INTSECL;
+
+ ROTMAT.M    - multi-dimensional rotation matrix
+               (used in INPOLYHD);
+
+ UNIQUEPT.M  - removes coincident points in many interpolation
+               routines;
+
+ Doclist     - a summary of various types of documentation
+               for SaGA.
+
+
+
+
+==== 06/30/95  Update ==========================================
+(posted to the MATLAB newsgroup):
+
+Here I announce the completion of a suite of various
+routines for polygon computations within the SaGA -
+Spatial and Geometric Analysis toolbox.
+
+  Planar geometry is quite an important area for many
+applications and related questions are fairly often
+asked in this newsgroup.
+  Unfortunately MATLAB currently offers very little
+here except plotting commands. Even such basic functions
+as polygon area or intersection of line segments 
+calculations are not available.
+
+SaGA in addition to its core spatial data interpolation
+and computational geometry routines now contains many
+functions for dealing with points, lines and polygons.
+
+They range from relatively simple, like area and centroid
+calculations to quite sophisticated ones, like Boolean
+operation on pairs of polygons (intersections, unions.
+etc.) For the latter see a graphics example in the 
+"gallery".
+
+
+
+======================================================
+============ Further development =====================
+
+The functions to be added in the nearest few days:
+------------------------------------------------------
+
+ Additional demo, info scripts 
+
+
+Functionalities which are soon to be included in SaGA:
+------------------------------------------------------
+  Interpolation by objective mapping and kriging methods
+with automatic calculation of correlation function and
+semi-variogram respectively; automatic rescaling
+
+  Objective mapping and kriging of 3-dimensional
+datasets.
+
+  Adaptive (successive correction)
+multi-dimensional inverse distance interpolation.
+
+  2-d natural neighbour interpolation 
+(based on Delaunay tesselation).
+

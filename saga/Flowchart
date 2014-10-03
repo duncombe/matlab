@@ -1,0 +1,127 @@
+<plaintext>
+*** This is a "flowchart" of the SaGA Toolbox *********
+*** showing dependences between different routines. ***
+
+(Legend:
+  A -----> B    A calls B,
+  A <----- B    A is called from B
+  A -----> B >> A calls B and B calls other
+                functions).
+
+
+   1. Planar geometry .............................
+
+isinpoly.m <-----  contourf.m
+
+intsecl.m  ------> linechk.m
+           <-----  polybool.m
+           <-----  intsecpl.m
+intsecpl.m ------> intsecl.m
+           ------> iscross.m
+iscross.m  ------> linechk.m
+           ------> interval.m
+           <-----  triangul.m
+           <-----  polybool.m
+isintpl.m  ------> iscross.m
+area.m     <<<---- polybool.m ...
+perimetr.m
+convex2.m  ----->  convex20.m
+isrect.m
+
+polyints.m ----->  polybool.m >>
+polyuni.m  ----->  polybool.m >>
+polydiff.m ----->  polybool.m >>
+polyxor.m  ----->  polybool.m >>
+
+polybool.m ----->  area.m
+           ----->  intsecl.m
+           ----->  iscross.m
+
+
+  2. Three-dimensional and spherical geometry .....
+
+sphangle.m
+bodyang.m
+eqdsph.m
+
+rotsolve.m -----> rotmat3.m
+z2rot.m    -----> rotmat3.m
+rotmat3.m
+rotmat.m   -----> combin.m >>
+
+
+  3. Multi-dimensional computational geometry .....
+
+fitplane.m
+project.m
+convexh.m  -----> cvxadd.m   ----> unique.m
+           -----> initspx.m
+addpt2ch.m -----> spx2fac.m  >>
+           -----> unique.m
+delaunay.m -----> mapsph.m
+           -----> convexh.m  >>
+voronoi2.m -----> triangul.m >>
+isdln.m    -----> circmsph.m >>
+spx2fac.m  -----> unique.m
+inpolyhd.m -----> inspx0.m
+volspx.m
+circmsph.m -----> circmsph0.m
+randsph.m
+randisph.m
+
+
+  4. Interpolation, triangulation, mapping ........
+
+triangul.m -----> inflate.m
+           -----> convex2.m  >>
+           -----> unique.m
+inmesh.m   <----  interptr.m
+interptr.m -----> triangul.m >>
+           -----> inmesh.m
+           -----> grad2est.m >>
+           -----> uniquept.m >>
+           -----> extraptr.m >>
+extraptr.m -----> adjspx.m
+           <----- interptr.m
+grad2est   -----> grad2ls.m
+           -----> grad2tcp.m
+           <----- interptr.m
+objmap.m   -----> quadtree.m >>
+           -----> mkblocks.m
+           -----> ptsinblk.m
+           -----> uniquept.m >>
+kriging.m  -----> quadtree.m >>
+           -----> mkblocks.m
+           -----> ptsinblk.m
+           -----> uniquept.m >>
+mincurvi.m -----> quadtree.m >>
+           -----> mkblocks.m
+           -----> ptsinblk.m
+           -----> uniquept.m >>
+invdisti.m
+
+interpm.m  -----> lagrcoef.m
+fillmiss.m
+locfilt.m
+
+
+  5. Graphics .....................................
+
+circle.m
+ellipsd.m
+polyplot.m -----> area.m
+contourf.m -----> isinpoly.m
+
+ellipsd.m
+tubes.m
+torus.m
+knots.m    -----> tubes.m
+mebius.m   -----> tubes.m
+
+surftri.m  -----> triangul.m  >>
+           -----> surf3chk.m
+           -----> surf3inf
+filltetr.m
+
+
+ 6. Auxillary .....................................

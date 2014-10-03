@@ -1,0 +1,158 @@
+% POLYINFO "Info" for various polygon routines in SaGA.
+%       It can be called from MATLAB by typing:
+%       >> type polyinfo
+ 
+% Kirill K. Pankratov, kirill@plume.mit.edu
+
+  This text contains the list and brief description of
+planar geometry operations in SaGA. This includes operations
+with points, lines, polygons.
+
+
+  Note on the syntax and format:
+  - - - - - - - - - - - - - - -
+Planar points are specified by pairs of coordinates X,Y.
+Some programs, such as AREA, CENTROID, allow complex
+arguments like X+i*Y, but most programs operate with
+real pairs of coordinates.
+
+Lines or line segments are specified by end-points
+coordinates [X0 X1],[Y0 Y1].
+
+Polygons are typically defined by their vertices
+coordinates XV, YV. By polygon we understand a set of
+all points inside a contour defined by these coordinate
+vectors XV,YV. The contour does not have to be closed.
+Most programs dealing with polygons close it automatically,
+assuming the last segment of a boundary contour connecting
+N-th nd 1-st point: {(XV(N),YV(N)), (XV(1),YV(1))}, where
+N is the number of vertices.
+Some operations are sensitive to the direction of such
+boundary contour. "Normal" direction is counter-clockwise;
+the area inside such a contour is assumed positive, for
+the clockwise contours the area is negative.
+
+Some programs support the "NaN-separated" format, when
+several polygons are concatenated into one:
+[X1; NaN; X2; NaN; X3; ...], [Y1; NaN; Y2; NaN; Y3; ...].
+This form implies that there are several separate polygons.
+in one coordinate vector.
+This is a convenient form for situations where the number of
+separate polygons in input/output is not known beforehand.
+Such a form is implicitly assumed in the MATLAB commands
+such as CONTOUR and PLOT.
+
+
+
+ Coordinate transformations and operations on sets of points:
+ ------------------------------------------------------------
+
+PLANEROT  - calculates coordinates of a set of points X,Y
+  rotated about some point at a certain angle.
+
+REFLECT  - calculates coordinates of a set of points X,Y
+  reflected about a line.
+
+CONVEX2  - calculates convex hull of a planar set of points.
+  Returns indices of points from a set which belong to a 
+  convex hull, ordered into a counter-clockwise contour.
+  (requires primitive CONVEX20).
+
+
+
+ Line segments:
+ -------------
+
+INTSECL  - calculates intersections of line segments specified
+  by end-point coordinates [X01 X11],[Y01 Y11] and
+  [X02 X12],[Y02 Y12].
+
+ISCROSS  - determines whether 2 line segments intersect each
+  other, without calculation of intersection coordinates 
+  themselves.
+
+
+ Unary operations with polygons:
+ -------------------------------
+
+AREA  - calculates area of a polygon with vertices X, Y;
+  (integral -Int{x dy} along the boundary contour).  Area is 
+  signed: positive for counter-clockwise contours, negative 
+  for clockwise ones.
+
+CENTROID  - calculates centroid coordinates X0, YO (center of
+  mass of a polygon bounded by a contour with vertices X, Y).
+  A polygon must be simply connected and non-self-intersecting.
+
+PERIMETR  - perimeter (total length of a sequence of line
+  segments). In contrast to other polygon-processing routine 
+  this one does not "close" polygon internally, so the input
+  can be just a sequence of segments, not a closed polygon.
+
+
+
+  Binary operations on polygons
+  -----------------------------
+
+ISINTPL  - finds whether two polygons intersect each other.
+   Returns boolean scalar equal to 1 if they have intersection
+   and 0 otherwise. Also returns boolean "intersection matrix"
+   whose (i,j) element is 1 if i-th segment of the first
+   polygon intersects j-th segment of the second polygon and
+   0 otherwise.
+
+The following programs perform various Boolean operations on
+polygons, such as intersection, union. They all have similar
+syntax like:
+[XO,YO] = POLYINTS(X1,Y1,X2,Y2) where X1, Y1 are coordinates
+of vertices of the polygon P1,  X2, Y2 - polygon P2.
+Returns coordinates XO, YO of vertices of one or more
+polygons which are the product of the corresponding Boolean
+operation. If result consists of more than one polygon, the
+vertices coordinates for different polygons are separated
+by NaN: XO = [XO1; NaN; XO2; ...], YO = [YO1; NaN; YO2; ...].
+
+See the cooresponding example in the "Gallery".
+
+POLYINTS - calculates intersection of polygons P1 and P2. 
+  Returns polygon(s) PO containing points which belong to 
+  both P1 and P2:  PO = P1 & P2.
+
+POLYUNI - calculates union of polygons P1 and P2. 
+  Returns polygon(s) PO containing points which belong to 
+  either P1 or P2:  PO = P1 | P2.
+
+POLYDIFF - calculates difference of polygons P1 and P2. 
+  Returns polygon(s) PO containing points which belong to 
+  P1 but not to P2:  PO = P1 & ~P2.
+
+POLYXOR - calculates exclusive OR of polygons P1 and P2. 
+  Returns polygon(s) PO containing points which belong either
+  to P1 or to P2 but not to both of them:
+  PO = (P1 | P2) & ~(P1 & P2).
+
+POLYBOOL  - Primitive for Boolean operation with polygons.
+  All the above Boolean functions call POLYBOOL and are
+  front-ends to it.
+
+
+
+  Various programs for points, lines, polygons:
+  --------------------------------------------
+
+ISINPOLY  - determines whether a point (or a set of points)
+  is inside or outside of a polygon with vertices X1,Y1.
+  Returns 1 for inside points, 0 - for outside, .5 - for
+  boundary points. Also returns 2 for a case of self-
+  intersecting polygon for points inside "double area".
+
+INTSECPL  - calculates intersections of a line with a
+  polygon. Returns coordinates XI, YI of intersections.
+
+POLYPLOT  - plotting or filling polygons. Similar to PLOT
+  or FILL command but automatically closes boundary
+  contours and supports "NaN-separated" format, allowing
+  to plot or fill groups of separate polygons in one call
+  and also to fill non-simply connected polygons (with
+  "holes") properly.
+

@@ -1,0 +1,564 @@
+<plaintext>
+***********           This is the              **********
+***********   "FREQUENTLY ASKED QUESTION"      **********
+***********    file for the SaGA Toolbox       **********
+
+This is just a beginning.
+This file will be constantly expanded and updated as a
+result of user's input.
+
+                        CONTENTS:
+
+  1. General.
+
+1.1 What is it all about?
+1.2 How do I find quickly what this toolbox can/can't do
+    and whether it has a capability I need?
+1.3 What are the current MATLAB capabilities for spacial
+    analysis?
+1.4 Why does GRIDDATA bogs down?
+1.5 Should I wait instead for the MATLAB 5.0 release for
+    many improvements in this area?
+
+
+  2. Registration, license.
+
+2.1 What is Limited license?
+2.2 Do I have to prove that I am a full-time student for
+    the student license registration?
+2.3 Why such a short free trial period?
+
+
+  3. Analysis of irregular spacial data.
+
+3.1 What are the most important methods of dealing with
+    irregular spatial data?
+3.2 What is a triangulation method?
+3.3 What is natural neighbour interpolation?
+3.4 What is kriging, objective maping, optimal
+    interpolation, minimum curvature interpolation?
+3.5 What is an inverse distance method?
+3.6 What is extrapolation as opposed to interpolation?
+3.7 Which interpolation/gridding method should I use?
+
+
+  4. Issues in Computational Geometry.
+
+4.1 What is a convex hull of a set of points?
+4.2 What is a simplex?
+4.3 What is Delaunay triangulation?
+4.4 What is Voronoi tesselation?
+4.5 Where these terms - Delaunay, Voronoi - come from and how to 
+    pronounce them?
+4.6 What is the volume of an n-dimensional simplex?
+4.7 How to calculate a circumsphere around an n-dimensional
+    simplex?
+
+
+
+        1. General.
+        -----------
+
+1.1 What is it all about?
+
+    SaGA is a toolbox intended to deal with geometry
+  and spatial - planar, spherical, three-dimensional and 
+  multidimensional data.
+  Its capabilities can approximately be divided into two groups.
+    First - which will probably find the most usage - is a set
+  of routines for for interpolation/mapping from irregularly-
+  spaced points (observations). This is a complicated problem 
+  frequently encountered in geology, geophysics, meteorology and
+  many other fields.
+  One can find and try different methods used in this
+  complex operation: triangulation, natural-neighbour,
+  inverse distance, kriging, objective mapping, minimum
+  curvature techniques with various options and parameters.
+  No single method is well suitable for all purposes and
+  datasets. Yet by trying various methods and programs
+  contained in SaGA one can most probably find a way which is
+  most suitable for his/her data.
+    Second - there is a large number of routines dealing with
+  geometric modeling and computational geometry. They can be 
+  used for many purposes, from simple plotting to constructive
+  geometry, mesh generation, visibility analysis, etc.
+  These routines range from relatively simple operations on 
+  planar polygons, like area and center of mass computations,
+  intersections, unions, point-in-polygon, etc. to very
+  sophisticated multi-dimensional computational geometry
+  algorithms, like convex hull and Delaunay triangulation.
+    In addition to these two groups there are also quite a few
+  qraphics programs. They include simple planar drawings, like 
+  ellipses and circles, filled contour plots and a variety of 
+  surface-plotting routines. Some of them produce quite a 
+  beautiful 3-d pictures, like "knots" or Mebius strips.
+
+
+1.2 How do I find quickly what this toolbox can/can't do
+  and whether it has a capability I need?
+
+  There is a fairly extensive on-line documentation available for SaGA.
+  It is detailed in the "Doclist" file in the /SAGA directory.
+  Generally various documentation files start with a capital letter,
+  so they appear first in the directory listing.
+  For a very quick overview one can start with the "Readme" file.
+  Most of the files (at least front-end routines) are listed in the 
+  "Contents". The "Flowchart" contains information about the calling
+  sequence and dependencies among various programs (which routine calls
+  which). "Whatsnew" informs about upgrades, bug fixes, further 
+  development and is updated regularly. This file "SagaFAQ" contains 
+  many useful stuff about various routines and underlying methods.
+  And don't forget to read the "License" file about the registration
+  and licensing.
+
+
+1.3 What are the current MATLAB capabilities for spatial
+    analysis?
+
+  Well, there aren't many. MATLAB was originally intended to deal with 
+  _matrices_, that is "regular data" objects. Algorithms dealing with 
+  irregular data are often difficult to put in the form of matrix 
+  algebra (where MATLAB is at its best) or vectorizable in other ways.
+  About the only function designed to deal with irregularly-spaced 
+  2-dimensional data - GRIDDATA has a very poor performance in terms of
+  memory, speed, flexibility, accuracy. Because of this it has drawn 
+  hundreds of complaints from users.
+    Concerning the development in this area within the MATLAB environment
+  but outside of The MathWorks, I am currently aware of one publication 
+  (and a program) for kriging by Denis Marcotte "Cokriging with Matlab"
+  in Computers in Geosciences, 1991.
+  Many scientists and engineers no doubt has done a lot of work in this 
+  area using MATLAB for their problems, yet not much is readily available
+  for other users.
+
+
+1.4 Why does GRIDDATA bogs down?
+
+  GRIDDATA is a 2-dimensional gridding problem supplied with MATLAB since
+  4.0. It has some very serious drawbacks which caused grievances from 
+  large number of users. In particular is uses too much memory (it does
+  not have any division procedure similar to the QUADTREE which is used 
+  throughout the SaGA toolbox and moreover uses more large matrices
+  than actualy needed).
+  In fact one should not use GRIDDATA at all unless:
+   - dataset is small enough (no more than several hundred points),
+   - extrapolation is not required,
+   - accuracy and performance constraints are lax enough.
+  In addition input to GRIDDATA requires some important preprocessing:
+  data must be well-scaled in all directions, mean and trend removed,
+  otherwise results can be ridiculous - one can get highly biased estimates,
+  especially for points near the boundary or outside of the known set.
+
+
+1.5 Should I wait instead for the MATLAB 5.0 release for
+    many improvements in this area?
+
+  One can certainly expect many improvement in the area of spatial data 
+  analysis (especially considering the current rudimentary level). 
+  During the MATLAB user conference in October 16-18, 1995 in Cambridge The 
+  MathWorks gave overvew of many new features iof MATLAB version 5.
+  Some of the capabilities currently available in SaGA will be offered
+  (for example, there going to be a MEX-file for 2-dimensional Delaunay
+  triangulation). I haven't seen however a serious breakthrough in the area
+  of spatial interpolation or geometrical modeling.
+  I belive The MathWorks major interests encompass linear algebra, signal 
+  processing, control, simulation, optimization and some other fields.
+  Although among the MATLAB users there is a great number of geophysisists,
+  geologists, oceanographers for whom analysis of spatial irregular data is
+  very important, The MathWorks currently does not seem to have either
+  expertise or commitment to address these needs.
+  In short, I argue that the SaGA toolbox provides much more in this area
+  than what The MathWorks would be able to come up with any time soon.
+  There are many features however which the future releases of SaGA can
+  benefit from. Among them there are "vectorized patch" 3-d graphics, more
+  sophisticated data structures, etc. I will try to incorporate these
+  improvements into SaGA as soon as the version 5 will be released.
+
+
+
+      2. Registration, license.
+      -------------------------
+
+2.1 What is a Limited license?
+
+  Limited registration assumes that user needs only a small part of this 
+  toolbox capabilities and feels that full registration fee is more than
+  he/she can afford for this level of usage. It is nevertheless entitles 
+  users to full technical support and updates.
+
+
+2.2 Do I have to prove that I am a full-time student for
+    the student license registration?
+
+  No, I believe you. Just let me know what college or university you are 
+  enrolled in and the department you are affiliated with (for statistical
+  survey purposes).
+
+
+2.3 Why such a short free trial period?
+
+  The free trial period of 15 days is certainly too short to become familiar
+  with all capabilities of the SaGA toolbox. However I believe it can be 
+  enough to determine whether you need it or not principally. I encourage 
+  earlier registration to start interacting with users, listen to their 
+  comments and needs and make improvements and additions as soon as
+  possible. I already received and further expect very valuable input from
+  users for future development. Together we can make it a better product.
+
+
+
+      3. Analysis of irregular spacial data
+      -------------------------------------
+
+3.0 ***  This section is intended to provide only basic information about
+  various interpolation methods. To really learn a lot of practical and 
+  useful things about interpolation, mapping, contouring I highly recommend
+  an excellent book by David F. Watson "Contouring: a practical guide ..." 
+  (see Bibliogr file).
+
+
+3.1 What are most commonly used methods of dealing with
+    irregular spatial data?
+
+  Most data analysis methods assume that data must lie on a regular grid.
+  It is incomparably easier to organize, manipulate and analyze data in this
+  case. Yet for a great number of real-world situations this is not the case
+  - data are not where we want them to be but where it happened to
+  be measured or available. To manipulate and visualize data easily one needs
+  to interpolate them to a regular grid or some other points where they are
+  needed. 
+    There are many methods of doing that as well as many classification
+  principles to group them. I prefer the following (incomplete and
+  approximate at best) classification:
+  - geometrical:
+    These are based mostly on the Delaunay/Voronoi decomposition of a domain.
+    The information for a given grid point is obtained from the nearest
+    points which share the same of adjacent Delaunay triangles. This is
+    implemented in the program INTERPTR (which has auxillaries EXTRAPTR and
+    GRAD2EST for extrapolation and gradient information). There is also a
+    newer and more advanced method of "natural neighbour interpolation"
+    based on Voronoi tesselation. It will be implemented in future versions.
+  - algebraic (e.g. polynomial, rational):
+      Unlike 1-dimensional and 2-d regular grid cases polynomials themselves
+    did not prove particulaly useful for irregular data interpolation.
+    Various rational functions are used much more frequently, such as in 
+    "inverse distance" method, which is probably the simplest gridding
+    algorithm (in SaGA it is implemented in the INVDISTI function). There 
+    are aslo spline-type methods based also on rational functions, such as 
+    "minimum curvature" type (MINCURVI in SaGA). 
+    These group of methods differ from geometrical ones in that they are 
+    global - all observations are used for each grid point (although this is
+    not the case with use of quadtree subdivision procedure). In geometrical
+    methods only near neighbouring points are used. Another difference is 
+    that geometric methods operate only with the metric properties (distance)
+    of data and do not use any parametric (polynomial, rational) 
+    representation. Algebraic ones explicitly rely on such representation 
+    for the "Green's function" of influences. In this sence geometrical 
+    methods are more "natural", while algebraic are smoother, with ready 
+    expressions for derivatives, etc.
+  - statistical:
+    These methods are based on the idea that the interpolated field can be
+    represented as a sum of space-time mean (and may be a trend) plus random
+    component with known covarianvce function. The expected mean-squared 
+    error of a linear combination of observed values is the minimized and
+    resuilting interpolation coefficients are obtained through inversion of
+    "Green's function matrix" between all observation points. Formally it 
+    is similar to some algebraic spline-type methods, such as minimum
+    curvature, but the "Green's function matrix" is calculated using
+    covariances betwen points and not predefined algebraic expressions.
+    Two widely used methods of this class are "objective mapping" and
+    "kriging" (also a more general term "optimal interpolation" is used).
+    They are veru similar up to each other. Probably the main difference is
+    the application domain: "kriging" is popular with geologists,
+    geophysisists while meteorologists, oceanographers use "objective
+    mapping". In SaGA both methods are represented, corresponding functions
+    are KRIGING and OBJMAP.
+
+
+3.2 What is a triangulation-based interpolation?
+
+  This is a group of methods which belongs to a broader class of what I call
+  "geometric interpolation methods". First we perform a triangulation of a
+  set of observation points - in SaGA there are two program for doing this - 
+  TRIANGUL (only for planar sets) and DELAUNAY (general-purpose, for 
+  arbitrarily-dimensional sets). Both perform a Delaunay triangulation (see 
+  section 4.3). Then we find which point belong to which triangle (The 
+  program INMESH does that). Then we perform a linear interpolation within
+  each triangle to inside interpolation points. The weights of the data at 
+  triangle vertices are proportional to the so-called baricentric area-based
+  coordinates. The resulting surface is equivlent to a tout rubber sheet 
+  meeting all data. Interpolation is continuous (and linear) inside each
+  triangle but the gradient has jumps across triangles boundaries.
+  It is possible to use gradient information to make it smooth. See INT3INFO
+  for more details and description of INTERPTR routine which performs this
+  interpolation. It has options for extrapolation beyond the convex hull 
+  (using EXTRAPTR) and incorporating gradient information (with GRAD2EST).
+
+
+3.3 What is natural neighbour interpolation?
+
+  Natural neighbour interpolation is among of the most sophisticated and 
+  reliable (although computationally expensive) methods. It is also related
+  to Delaunay triangulation but more complicated than the simplest 
+  triangulation-based interpolation decribed in the previous section.
+  Firstly, one needs to introduce the concept of natural neighbours. 
+  Natural neihgbours for a point X are points belonging to all Delaunay 
+  triangles for which X is inside circumferences of these triangles. Then 
+  the "natural  neighbour coordinates" are computed for all natural
+  neighbours. This coordinates are area-based and are equal to fraction of
+  Voronoi polytope of a given data point which intersects the Voronoi
+  polytope of a given interpolation point in a set of basis points.
+  The actual calculations are simpler than that and use Delaunay triangles
+  rather than Voronoi polytopes. The interpolation coefficients can be 
+  negative when corresponding triangles are opposite-signed.
+  Construction method is described in a paper by Sibson and Watson's book
+  (see Bibliogr).
+  Implementation of this method in SaGA is reserved for future version.
+
+
+3.4 What is kriging, objective maping, optimal
+    interpolation, minimum curvature interpolation?
+
+  All of them are methods of "global" interpolation (like splines) in the
+  sense that all available data points formally participate in the 
+  calculation of values for each interpolation point. The weights for each
+  datum are calculated by inversion of a "Green's function" matrix 
+  depending on the distances between each data points.
+    Green's functions are different for all these methods.
+  For minimum curvature method Green's function is standard (such as
+  r^2*(log(r)-1) ), for kriging and objective mapping it depends on the
+  correlation function and semivariogram of the interpolated field 
+  respectively. Therefore some apriory statistics should be known (or
+  assumed).
+    For more details and syntax of the corresponding routines MINCURVI,
+  OBJMAP, KRIGING see MAPINFO file and "help" sections for the those 
+  programs.
+
+
+3.5 What is an inverse distance method?
+
+  Basically it is a fairly simple weighted average method. Inverse distance
+  method uses estimates for interpolation points as weighted sum of data 
+  values. Weights are inversely proportional to the distance R between
+  interpolation and basis points: w ~ R^(-n)
+  where  n - some positive index. The choice of power index  n  can depend
+  on the dimensionality of the problem and data itself. There are no
+  universal optimal values. One reasonable constraint is that n should be
+  more than d - dimension of the data set. This ensures that if a dataset
+  contains many points and thery are approximately uniformly (although may
+  be randomly) distributed in space the total influence of far-away points
+  will not increase with distance, so the nearest points will be given
+  larger weights. Thus, for example, for planar dataset on can choose n = 3,
+  4, for 3-D - n = 4,5, etc. The program INVDISTI allows to choose the power
+  index n. Moreover, it allows to blend estimates with different n in one
+  call. One can experiment with data to choose the best combination of n and
+  blending coefficients for a particular dataset.
+  The  INVDISTI program is currently the only one in SaGA which can
+  interpolate data in dimension higher than 2.
+
+
+3.6 What is extrapolation as opposed to interpolation?
+
+  It is very easy in one-dimensional case. Let's assume that all available
+  data x_i lie between points A=min(x_i) and B=max(x_i). Then if our 
+  interpolation point is also between A and B it is interpolation, if it
+  is <A or >B it is extrapolation.
+  For 2-d and higher-dimensional case it is a little bit more complicated.
+  Interpolation - for points inside a _convex hull_ of a set of points 
+  (see 4.1 section). In 2-d it can be viewed as the inside of the "fence"
+  corraling all the points of a set.
+  Extrapolation - for points beyond the convex hull of a set.
+    Interpolation and extrapolation typically have significant differences
+  in accuracy. Interpolation usually can be made much more accurately, 
+  because the known points are "all around" the interpolation points.
+  Moreover, some methods (especially geometrical ones) are intrinsically 
+  designed for interpolation, and for the extrapolation points the rigorous
+  rules of these methods do not apply and some "ad hoc" generalizations 
+  are usually implemented.
+    Various methods handle extrapolation differently. Global spline-like
+  methods, such as minimum curvature (in MINCURVI) are the least reliable
+  and can produce artificial overshoots and trends. On the other hand
+  formally similar to that kriging and objective mapping methods handle 
+  distant points without strong overshoots, although with relatively low
+  accuracy. Inverse distance is probably the most robust: for infinitely 
+  distant points the extrapolated value tends to a simple average of all
+  the  available values.
+    For triangulation-based methods, such as triangular baricentric or
+  natural neighbour coordinates there is no unique way to extrapolate.
+  Various ad-hoc methods can give either resonable or very poor results
+  depending on the data.
+    In general one should be very cautiuos about values for extrapolation
+  points, especially when data are highly variable near the boundaries of
+  convex hull and extrapolation points are far away from the dataset.
+
+
+3.7 Which interpolation/gridding method should I use?
+
+  SaGA toolbox offers a variety of tools for interpolation from
+  irregular points. They can be roughly divided into 3 groups:
+    1. Inverse distance - the simplest although often the least accurate
+  method, works for arbitrary-dimensional datasets, implemented in the
+  function INVDISTI. If you not particularly concerned about accuracy but
+  would rather prefer speed, try it. To improve accuracy you can experiment
+  with power index n and weights for estimates with different n. For some
+  cases one can optimize these parameters to achieve pretty good
+  interpolation.
+    2. Triangulation-based method. Usually robust and accurate enough,
+  although one must be cautios about points near the boundary of a convex
+  hull (where Delaunay triangles are often long and thin). In SaGA it is
+  implemented in the INTERPTR function and has various options: to 
+  extrapolate beyond the convex hull (perimeter encompassing the set of 
+  points), to "smooth" the results using the gradient estimates with control
+  of the "toutness" of the resulting surface. 
+  It uses the following functions:
+  TRIANGUL, CONVEX2, CONVEX20, INFLATE, INMESH, 
+  ETRAPTR, ADJSPX, GRAD2EST, GRAD2LS, GRAD2TCP, UNIQUE.
+    3. "Global" interpolation (objective mapping, kriging, minimal 
+  curvature method). All these methods require inversion of some kind of a
+  "Green's function" matrix. Such methods are most often used in geophysics,
+  meteorology, oceanography. They usually require some apriory information 
+  about structure of "correlation function" or "variogram" of the field to
+  be interpolated. These methods are implemented in the functions OBJMAP,
+  KRIGING, MINCURVI. They also need functions DETREND2, MKBLOCKS, PTSINBLK,
+  QUADTREE, QTREE0.
+     
+
+
+  4. Issues in Computational Geometry.
+  ------------------------------------
+
+4.1 What is a convex hull of a set of points?
+
+  This is one of the most fundamental concepts in computational geometry.
+  Convex hull can be viewed as "inside" region of a dataset. For a planar
+  case one can visualize data points as nails in the board and there is a
+  string which is pulled over these nails so that all of them are inside.
+  The area bounded by this string is a convex hull and the string itself 
+  is its boundary. Similarly in 3-d case it canbe viewed as inside of a
+  "wrapping paper" over a set od points.
+    More rigorous definition for n-dimensional set can be the following:
+  take all the (hyper)planes passing through n points of a set so that one
+  of the half-spaces separated by such a plane does not contain any points
+  of a set. The intersection of all the other half-spaces (containing all
+  points of a set) of all these (hyper)planes is a convex hull of this set.
+    In practical terms computing convex hull means finding all the facets 
+  of its boundary - combinations of n points which define the plane dividing
+  space into 2 half-spaces, one of which is void of set points. Therefore
+  the data structure of a convex hull can be a matrix N by n of indices of
+  set points, so that each row is a list of vertices of such a facet.
+    The CONVEXH routine returns such a  list and also (optional) matrix of
+  the same N by n size where each row is a normal vector to each facets.
+    For planar case the output is actually simpler - all we need to know is
+  a list of vertices of a polygon which define the boundary of a convex hull.
+  For this case there is a separate (much simpler) program CONVEX2 which 
+  returns a vector of indices of points in this polygon.
+
+
+4.2 What is a simplex?
+
+  The "simplest" combination of points in n-dimensional space
+  enclosing a finite volume. 
+  One can probably imagine the simplest object to be a
+  (hyper)-cubic cell in n-dimensions, such as rectangle in 2-D, cube in 3-D,
+  etc. Yet such a cell is _not_ the simplest or most convenient object. 
+  The simplest object is a triangle in the planar case, tetrahedron in 3-D,
+  etc.
+    Its convenience and universality can be illustarted by the following
+  important property: any polygon (polyhedron) can be divided into non-
+  intersecting triangles (tetrahedra) possibly having adjacent vertices,
+  edges or faces, but it can not in general be divided into rectangles
+  (cubes) in general. This property is used for triangulation - a procedure 
+  having many applications, from interpolation to mesh generation and finite
+  element analysis.
+    There is a general property of a set of points in n-dimensional space:
+  a convex hull of any such set can be divided into non-intersecting (but
+  possibly adjacent) simplices with vertices belonging to this set of points.
+
+
+4.3 What is Delaunay triangulation?
+
+  Planar triangulation is a division of a convex hull of a set 
+  of points into adjacent triangles with vertices from this set.
+  Triangulation can be done in many ways, obviously some ways are better
+  than others. The Delaunay triangulation is the one which has the following
+  important property: inside the circumference of any triangle there are no
+  other points of this set. Therefore  such triangulation is "natural" and
+  optimal in many respects. It is relatively easy to construct and there are
+  many known algorithms which perform such a triangulation. The program
+  TRIANGUL (and also DELAUNAY) perform a planar triangulation.
+    This concept can easily be generalized to an n-dimensional set. Delaunay
+  triangulation (in this case a partition into simplices) among many other 
+  possible triangulations has the property that inside a circumsphere of any
+  simplex there are no other points belonging to this set. Delaunay
+  triangulation is proven to be statistically optimal in some sense and is 
+  most widely used in practice.
+    The program DELAUNAY computes the Delaunay triangulation
+  in arbitrary dimension. It returns a matrix where each row is
+  a list of indices of points defining a simplex. 
+
+
+4.4 What is Voronoi tesselation?
+
+  This is another fundamental partition of a domain.
+  The simplest definition is probably the following: Voronoi polytope for
+  an point A in a set S is a subset of all points in S which are closer to
+  A than to any other points in this set. The whole space can be divided 
+  into Voronoi polytopes. Voronoi tesselation is dual to Delaunay 
+  triangulation. Its vertices are circumcenters of Delaunay triangles 
+  (simplices in higher dimensions). These two structures can be relatively
+  easily constructed from one another.
+  The program VORONOI2 calculates and plots a 2-dimensional Voronoi diagram.
+
+
+4.5 Where have these terms - Delaunay, Voronoi - come from and how to 
+    pronounce them?
+
+  Such questions arise regularly in the newsgroups such as
+  sci.math.num-analysis or comp.graphics.algorithms.
+  Delaunay and Voronoi are probably two biggest names in computational
+  geometry. Delaunay was a math professor at Moscow University in 20- 
+  30-ies(?). He seems to be of a French descent. There are no Russian
+  name which have similar spelling, while it is a fairly frequent French
+  name [de - la -'ne]. This is quite possible, since there were quite a lot
+  of French settled in Russia after French Revolution and in 19-th century.
+  Voronoi worked in Germany and in France at the beginning of this
+  century. It is interesting to note that in contrast to Delaunay he
+  probably was of Russian origin. This is a typical Russian word and name 
+  pronounced [vo-ro-'noy]. It means "raven" (color, typically of a horse).
+  These names are connected with a fundamental partition of a domain -
+  Delaunay triangulation and Voronoi tesselation. This partition and
+  discovery of its many properties is also connected with other names - 
+  such as Dirichle and Thiessen.
+
+
+4.6 What is the volume of an n-dimensional simplex?
+
+  Choose one point of a simplex to be the origin. The coordinates 
+  of other points relative to it will form an n by n matrix R.
+  The determinant of this matrix divided by the factorial of n will
+  give the volume:
+  Det(R)/n!
+  In 2-d (triangle) it is equal to 1/2 of the cross-product of the
+  vectors forming two sides of a triangle.
+  In 3-d (tetrahedron) - 1/6 of the triple product of vectors forming
+  3 edges (volume of a parallelepiped formed by these edges).
+  The routine VOLSPX calculates this value given the vertices 
+  coordinates.
+
+
+4.7 How to calculate a circumsphere around an n-dimensional
+    simplex?
+
+  Choose one point of a simplex to be the origin.
+  The coordinates of other points relative to it will
+  form an nxn matrix R. Normalize each vector (row of a 
+  matrix R) by its squared length divided by 2.  This will
+  give equations of normal vectors to the planes through mid-
+  points of edges of a simplex. Intersections of these planes
+  will give the center of a circumcircle. In MATLAB the
+  latests stage is a single backslash operation:
+  c = R\[1 1 ... 1]'.
+  This method is implemented in the program CIRCMSPH in SaGA.
+
+
+

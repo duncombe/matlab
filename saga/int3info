@@ -1,0 +1,112 @@
+% INT3INFO "Info" for INTERPTR roitine in SaGA -
+%	Interpolation by triangulation method.
+%       It can be called from MATLAB by typing:
+%       >> type int3info    or
+%       >> interptr info 
+ 
+% Kirill K. Pankratov, kirill@plume.mit.edu
+ 
+  INTERPTR routine performs 2-dimensional interpolation by the 
+triangulation method - using the so-called triangular baricentric 
+coordinates.
+  By default it interpolates only for points inside a convex hull
+of a set of basis points, but has options for extrapolation 
+everywhere and option for blending with gradient information
+(see below).
+
+
+  ALGORITHM:
+
+  First, a Delaunay triangulation is performed using TRIANGUL program.
+  Then the routine finds which triangle each interpolation point belongs
+to, using INMESH program.
+  After that it calculates the baricentric coordinates of each
+interpolation point.
+  Baricentric coordinates are essentially the weights of values of
+triangular vertices for interpolation inside a triangle.
+For a triangle with vertices A,B,C and an interpolation point X
+inside it the weights wA, wB, wC are equal to the areas of triangles
+XCB, AXC, ABX respectively, divided by the area ofthe triangle ABC 
+itself. 
+  These weights are used in a linear interpolation procedure:
+z(X) = z(A)*wA+z(B)*wB+z(C)*wC.
+
+  This form is equivalent to a plane passing through all 3 points
+of a triangle.
+  Such interpolation procedure is formally valid for any points on 
+a plane X,Y. For points outside a triangle the signed area should be
+used (so that weights can be negative).
+  The resulting interpolated surface is equivalent to a tout rubber
+sheet fixed at all data points. Inside each triangle the surface is
+strictly linear. At the boundaries of triangles it is continuous
+but not smooth - the gradient is discontinuous.
+
+
+  EXTRAPOLATION:
+
+  By default the estimates for points outside triangles are not 
+performed (output is NaN). There is however the option for 
+extrapolation beyond the convex hull (i.e. to the points which do not
+belong to any triangle). This can be specified by option 'e' as input
+argument:
+ZI = INTERPTR(X,Y,Z,XI,YI,'e')
+  The algorithm for extrapolation is implemented in the routine
+EXTRAPTR and includes the following:
+All "boundary" triangles having a side on the convex hull boundary
+are found. For each interpolation point only those triangles are
+selected which 
+Then linear extrapolation is performed from all eligible triangles
+using above described (signed) area-weighted method.
+  All this estimates are in turn weighted inversely proportional to
+the sum of distances from an interpolation point to all triangle 
+vertices. The result is combined estimate from several triangles to 
+enhance robustness and smoothness of extrapolation.
+Still when extrapolated field  has a high variability near the
+boundaries of the convex hull, the results can be unreliable.
+
+
+  GRADIENT ESTIMATION
+
+  The program also has an option for smoother interpolation - using 
+gradient estimates. Gradients are estimated at at the basis points
+using all neigbouring triangles sharing this point.
+  Gradient estimation is performed in the program GRAD2EST (front-end)
+which can call either GRAD2TCP or GRAD2LS (primitives).
+  These are two different methods of gradient estimation:
+GRAD2LS is a default routine for GRAD2EST and uses least-square
+fit of a plane passing through the point where gradients are 
+estimated;
+GRAD2TCP uses cross-product method - the estimated gradient (as a 
+normal vector to a tangent plane) is obtained as a sum of cross-
+products of sides of triangles sharing the vertex.
+There are also additional options in the GRAD2TCP program specifying
+the methods of weighting of cross-products of each triangle.
+  The extent to which gradient information is incorporated (toutness 
+or elasticity control) is specified by additional parameter P (the
+last input argument). P=0 is equivalent to absence of the gradient
+information (tout surface), larger P correspond to more "elastic"
+surfaces. Optimal values of P usually are about 1, P>>1 can cause
+"overelastic", "inflated" surface.
+
+
+  SYNTAX
+
+The simplest call to INTERPTR must have at least 5 input arguments
+and is similar to other 2-D interpolation programs:
+
+  zi = interptr(x,y,z,xi,yi)
+
+Next argument is a string specifying whether extrapolation or gradient
+information or both should be used:
+  interptr(x,y,z,xi,yi,'e')  - extrapolation,
+  interptr(x,y,z,xi,yi,'g')  - incorporate gradient estimates,
+  interptr(...,'eg')  or  interptr(...,'ge') - both.
+
+The last argument is a toutness parameter (positive scalar) in case
+when gradient information is involved. for example:
+  interptr(...,'eg',.5)   performs both extrapolation, gradient 
+smoothing with toutness parameter .5.
+
+For more information see "help" sections for the programs
+TRIANGUL, EXTRAPTR, INMESH, GRAD2EST, GRAD2TCP, GRAD2LS.
+

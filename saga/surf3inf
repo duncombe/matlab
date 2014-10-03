@@ -1,0 +1,21 @@
+% SURF3INF  Info for triangulated surface plotting
+%	program SURFTRI.M
+
+%  Copyright (c) 1995 by Kirill K. Pankratov
+%  kirill@plume.mit.edu
+%  05/10/95
+
+ % Generate a set of random points X,Y
+n = 200;
+x = randn(n,1); y = randn(n,1);
+
+surftri(x,y)
+surftri(randn(200,2),'none')
+
+
+ % Generate uniform random points on a sphere
+n = 100;
+R = randsph(n);
+N = convexh(R);
+
+p = surftri(N,R);

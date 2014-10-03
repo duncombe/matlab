@@ -1,0 +1,181 @@
+<plaintext>
+ _______________ SaGA  Contents ________________________
+
+This is a brief description of contents and functionality
+of the SaGA  - Spatial and Geometric Analysis toolbox.
+
+Kirill K. Pankratov, Ph.D.
+Center of Meteorology and Physical Oceanography
+Atmospheric & Planetary Sciences (EAPS)
+Massachusetts Institute of Technology
+
+
+  SaGA is a collection of MATLAB functions designed for
+various aspects of geometrical and spacial modeling.
+
+  Here is a partial list of programs contained in SaGA:
+
+     1. Planar geometry **********************************
+
+  1.1 Points, lines, polygons
+
+isinpoly.m  - determining whether point is inside or outside
+              of a closed contour (polygon).
+intsecl.m   - calculates intersection coordinates of line
+              segments.
+intsecpl.m  - calculates intersection of a polygon by a line.
+iscross.m   - determines whether pairs of line segments 
+              cross each other.
+isintpl.m   - determines whether 2 polygons are 
+              intersecting.
+area.m      - calculates area of a planar polygon.
+perimetr.m  - calculates perimeter of a polygon (total
+              length of a sequence of line segments).
+centroid.m  - calculates centroid (center of mass) of a
+              polygon.
+planerot.m  - planar rotations.
+reflect.m   - reflection about an axis (line).
+convex2.m   - convex hull of a planar set of points.
+isrect.m    - True if polygon encloses a rectangular shape.
+              (co-winner of the MATLAB  M-file Contest4)
+
+  1.2 Boolean operations on polygons:
+
+polyints.m  - calculates intersection of two polygons.
+polyuni.m   - calculates union of two polygons.
+polydiff.m  - calculates difference of two polygons.
+polyxor.m   - calculates XOR (exclusive OR) of two polygons.
+polybool.m  - primitive for all the above boolean functions.
+
+
+     2. Three-dimensional and spherical geometry **********
+
+  2.1 Spherical geometry:
+
+sphangle.m - distance (or planar angle) between pairs of
+             points on a sphere.
+bodyang.m  - body (solid) angle of a triplet of points as 
+             seen from the origin of the coordinate system.
+eqdsph.m   - calculates "equilibrium" distribution of N 
+             points on a sphere.
+
+  2.2 Three-dimensional motions and rotations.
+
+rotmat3.m  - 3-dimensional rotational matrix with specified
+             axes and angles of rotation.
+rotsolve.m - solves solid-body motion-rotation problem:
+             determines rotation matrix and translation 
+             vector given the positions of 3 points of a
+             solid body at 2 time moments.
+z2rot.m    - transforms direction of z-axis into 3 by 3
+             rotation matrix by 2 Euler angles (theta, psi).
+
+
+     3. Multi-dimensional computational geometry **********
+
+fitplane.m  - fitting a plane (or hyperplane) through a
+              set of points.
+project.m   - projection of a set of points on a plane or
+              hyperplane.
+rotmat.m    - multi-dimensional rotational matrix.
+convexh.m   - convex hull of a multi-dimensional set of
+              points.
+addpt2ch.m  - adding an outer point to a convex hull.
+delaunay.m  - Delaunay triangulation/tesselation of a 
+              multi-dimensional set of points.
+voronoi2.m  - Voronoi diagram for a planar set of points.
+isdln.m     - Finds whether given triangulation/tesselation
+              is Delaunay one.
+spx2fac.m   - transforms a list of simplices of a 
+              tesselated dataset into a list of faces 
+              (boundaries of simplices).
+inpolyhd.m  - calulates whether a point is inside a
+              multi-dimensional polyhedron 
+              (analogue of ISINPOLY).
+volspx.m    - calculates volume inside a multi-dimensional simplex
+              (triangle, tetrahedron ...).
+circmsph.m  - calculate center and radius of a circumsphere 
+              around a multi-dimensional simplex 
+              (triangle, tetrahedron ...).
+randsph.m   - random points on a multi-dimensional unit 
+              sphere.
+randisph.m  - random points inside a multi-dimensional
+              unit sphere.
+
+
+    4. Interpolation, triangulation, mapping ************
+
+  4.1 Triangulation and related interpolation.
+
+triangul.m  - Delaunay triangulation of a planar set of
+              points.
+inmesh.m    - finding which facets of a mesh a point 
+              belongs to.
+interptr.m  - interpolation with triangulation method 
+              (linear 2-d interpolation inside triangles).
+extraptr.m  - extrapolation beyond the convex hull of a
+              2-dimensional triangulated region.
+grad2est.m  - gradient estimation from neighbouring points 
+              of irregular planar set (used in INTERPTR)
+
+
+  4.2 Objective mapping, kriging and other
+      interpolation  techniques
+
+objmap.m    - objective mapping interpolation with 
+              corresponding error map.
+kriging.m   - interpolation using Kriging method.
+mincurvi.m  - interpolation using minimal curvature 
+              method.
+invdisti.m  - inverse distance interpolation/extrapolation
+              of multi-dimensional irregular sets of points.
+quadtree.m  - adaptive "quadtree" division of 2-d
+              domain into subdomains (used in all
+              matrix-inversion interpolation methods:
+              OBJMAP, KRIGING, MINCURV).
+detrend2.m  - removing mean and mean slope from 2-d
+              data set (used in OBJMAP, KRIGING, 
+              MINCURV).
+
+
+  4.3 Regular grid interpolation and image processing
+
+interpm.m   - interpolation between rows and columns of a
+              matrix ("smoothing" a matrix).
+fillmiss.m  - filling missing elements in a matrix 
+              (interpolation from neighbouring elements).
+locfilt.m   - local window 2-d filtering of an (image) 
+              matrix. Has more options and more memory-
+              efficient than the similar function COLFILT
+              in the Image Processing Toolbox.
+
+
+    5. Graphics *******************************************
+
+  5.1 Planar graphics
+
+circle.m    - plotting circles with specified position,
+              radius, width, styles, etc.
+ellipse.m   - plotting ellipses with specified positions,
+              semiaxes, orientation, etc.
+polyplot.m  - plotting or filling polygons (possibly non-simply
+              connected or several polygons concatenated in one
+              vector).
+contourf.m  - filled contour plots.
+
+  5.2 Three-dimensional graphics
+
+ellipsd.m   - ellipsoid surface plot (with specified 
+              semiaxes and orientation).
+tubes.m     - "tube" or "hose" surface around a 
+              3-dimensional line.
+torus.m     - toroidal surface plot with specified inner
+              and outer radii, width, etc.
+knots.m     - "knots" of specified order: periodic tube-like
+              surfaces with various symmetries.
+mebius.m    - "Mebius strips" of various orders.
+surftri.m   - 2-d or 3-d triangulated surfaces plots with
+              specified coloring etc.
+filltetr.m   - plotting tetrahedron with specified vertices
+              coordinates and coloring.
+
