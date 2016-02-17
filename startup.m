@@ -18,51 +18,113 @@ initialize
 
 % neutral density programs required by AOML/ctdcal
 % path( path, [HOME 'matlab/neutral/gamma/matlab-interface'] );
-path( path, fullfile(HOME,'matlab','neutral','') );
+PATHADDITION=fullfile(HOME,'matlab','neutral','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % m2html generates documentation for mfiles 
-path( path, fullfile(HOME,'matlab','m2html','') );
+PATHADDITION=fullfile(HOME,'matlab','m2html','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % this is for seawater equation of state functions
-path( path, fullfile(HOME,'matlab','seawater','') );
+PATHADDITION=fullfile(HOME,'matlab','seawater','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % the equation of state has been updated. TEOS10.
-path( path, fullfile(HOME,'matlab','gsw','') ); 
+PATHADDITION=fullfile(HOME,'matlab','gsw','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION ); 
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % this is for mapping functions
-path( path, fullfile(HOME,'matlab','m_map','') );
+PATHADDITION=fullfile(HOME,'matlab','m_map','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % I don't think I ever used stixbox for anything
-path( path, fullfile(HOME,'matlab','stixbox','') );
+PATHADDITION=fullfile(HOME,'matlab','stixbox','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+else
+	disp([PATHADDITION ' does not exist'])
+end
+
 % path( path, [HOME 'matlab/mysignal'] );
 
 % I don't think I ever used saga for anything
-path( path, fullfile(HOME,'matlab','saga','') );
+% PATHADDITION=fullfile(HOME,'matlab','saga','');
+% if exist(PATHADDITION,'dir')
+% 	path( path, PATHADDITION );
+% else
+% 	disp([PATHADDITION ' does not exist'])
+% end
 
 % I am definitely using LIBRA, for AOML CTD data reports
-path( path, fullfile(HOME,'matlab','LIBRA','') ); 
+PATHADDITION=fullfile(HOME,'matlab','LIBRA','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION ); 
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % circular statistics toolbox
 % path( [HOME 'matlab' filesep 'circStat2009'], path );
-path( fullfile(HOME,'matlab','CircStat',''), path );
+PATHADDITION=fullfile(HOME,'matlab','CircStat','');
+if exist(PATHADDITION)
+	path( PATHADDITION, path );
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % best straight line regression (york et al)
-path( fullfile(HOME,'matlab','york_curve_fit_0_01',''), path );
+PATHADDITION=fullfile(HOME,'matlab','york_curve_fit_0_01','');
+if exist(PATHADDITION,'dir')
+	path( fullfile(HOME,'matlab','york_curve_fit_0_01',''), path );
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 
 % % Directional Analysis toolbox (Not for runtime! IOW, kak!)
 % path( [HOME 'matlab' filesep 'DirectionalAnalysis'], path );
 
 % this is my useful functions
-path( fullfile(HOME,'matlab','useful',''), path );
+PATHADDITION=fullfile(HOME,'matlab','useful','');
+if exist(PATHADDITION)
+	path( PATHADDITION, path );
+else
+	disp([PATHADDITION ' does not exist'])
+end
 
 % this is for working with netcdf files (jain/hdmodel/hgui)
-path( fullfile(HOME,'matlab','mexcdf','mexnc',''), path );
-path( fullfile(HOME,'matlab','mexcdf','snctools',''), path );
-if isempty(javachk('jvm'))
-	javaaddpath(fullfile(HOME,'matlab','mexcdf','netcdfAll-4.1.jar'));
+PATHADDITION=fullfile(HOME,'matlab','mexcdf');
+if exist(PATHADDITION)
+	path( fullfile(PATHADDITION, 'mexnc',''), path );
+	path( fullfile(PATHADDITION, 'snctools',''), path );
+	if isempty(javachk('jvm'))
+		javaaddpath(fullfile(PATHADDITION,'netcdfAll-4.1.jar'));
+	end
+else
+	disp([PATHADDITION ' does not exist'])
 end
 % 
+
 path( fullfile(HOME,'matlab',''), path );
 
 % path( path, [HOME 'matlab/acklam_utils/datautil'] );
@@ -87,17 +149,42 @@ path( fullfile(HOME,'matlab',''), path );
 % path( path, [HOME 'WORK/AOML/CTD/ctdcal'] );
 % path( path, [HOME 'WORK/AOML/CTD/ctdcal/CMDR'] );
 % setpref('ctd_calibration','dir',[HOME 'WORK/AOML/CTD/CALIBRATIONS']);
-path( path, fullfile(HOME,'matlab','ctdcal','') );
-path( path, fullfile(HOME,'matlab','ctdcal','CMDR','') );
+PATHADDITION=fullfile(HOME,'matlab','ctdcal','');
+if exist(PATHADDITION)
+	path( path, PATHADDITION );
+end
+
+PATHADDITION=fullfile(HOME,'matlab','ctdcal','CMDR','');
+if exist(PATHADDITION)
+	path( path, PATHADDITION );
+end
 
 % Now working at WHOI on wave data analysis; other data processing
-path( path, fullfile(HOME,'matlab','Wave_Software','') );
-path( path, fullfile(HOME,'matlab','WHOI_Data_Proc','') );
-path( path, fullfile(HOME,'matlab','WHOI_Data_Proc','RDI_processing','') );
-path( path, fullfile(HOME,'matlab','WHOI_Data_Proc','Nortek','') );
+PATHADDITION=fullfile(HOME,'matlab','Wave_Software','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+end
+
+PATHADDITION=fullfile(HOME,'matlab','WHOI_Data_Proc','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+end
+
+PATHADDITION=fullfile(HOME,'matlab','WHOI_Data_Proc','RDI_processing','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+end
+
+PATHADDITION=fullfile(HOME,'matlab','WHOI_Data_Proc','Nortek','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+end
 
 % For tidal analysis trying to use Rich Pawlowicz T_TIDE toolbox
-path( path, fullfile(HOME,'matlab','t_tide','') );
+PATHADDITION=fullfile(HOME,'matlab','t_tide','');
+if exist(PATHADDITION,'dir')
+	path( path, PATHADDITION );
+end
 
 
 % path( '/home/asttex/matlab' , path );

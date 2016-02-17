@@ -10,6 +10,10 @@ HOME=fullfile(getenv('HOME'),'');
 MATLAB=fullfile(getenv('MATLAB'),'');
 
 LOGDIR=fullfile(HOME,'matlab','log','');
+if ~exist(LOGDIR)
+	mkdir(LOGDIR);
+end
+
 
 clear status
 
