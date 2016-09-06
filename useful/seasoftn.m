@@ -12,10 +12,10 @@ function [data, vars, pos, time, stn] = seasoftn (str)
 %		header:	string matrix containing file headers
 %		str:	filename of s87 file containing data
 %		
-% Example -	to load data from a file 'test.s87' and put data into 
+% Example -	to load data from a file 'test.cnv' and put data into 
 %		vectors named according to s87 format identifiers:
 % 		
-%			[D vars pos] = s87loadn('test.s87');
+%			[D vars pos] = seasoftn('test.cnv');
 %			latitude = imag(pos); longitude = real(pos);
 %			nvars=size(vars,1);
 %			for ii = 1:nvars,
