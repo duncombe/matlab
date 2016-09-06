@@ -229,7 +229,8 @@ set(0, 'DefaultPatchEdgeColor','none'); % to set default shading flat
 					% for surface and pcolor
 
 % start a diary with some kind of unique name, and put them all in one place.
-diary(fullfile(LOGDIR, [ 'matlab.' sprintf('%04d%02d%02d-%02d%02d%07.4f',datevec(now)) '.log']));
+LOGFILE=fullfile(LOGDIR, [ 'matlab.' sprintf('%04d%02d%02d-%02d%02d%07.4f',datevec(now)) '.log'])
+diary(LOGFILE);
 
 % if we have some local requirements, put them in an mfile in
 % the cwd. 
